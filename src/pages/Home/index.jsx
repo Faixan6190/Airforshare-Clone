@@ -1,10 +1,11 @@
 import LOGO from "../../assets/images/logo.svg";
+import "./css/style.scss";
 
 function HomePage() {
   return (
     <div className="container">
       <div className="header-bar">
-        <div>
+        <div className="logo">
           <img src={LOGO} alt="" />
         </div>
         <div>
