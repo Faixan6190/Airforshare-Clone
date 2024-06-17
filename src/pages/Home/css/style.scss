@@ -1,9 +1,52 @@
 $white: #fff;
+$light-color: #4a4a4a;
+$body-background: #f4f4f4;
+$primary-color: #638eff;
+
+body {
+  background: $body-background;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .logo {
-  width: 100%;
   img {
     width: 100px;
     cursor: pointer;
   }
+}
+.menu-bar {
+  ul {
+    display: flex;
+    gap: 40px;
+    li {
+      list-style-type: none;
+      color: $light-color;
+      font-size: 14px;
+    }
+    .menu-btn {
+      color: $primary-color;
+      font-weight: 700;
+    }
+  }
+}
+
+.main-card {
+  background-color: $white;
+  width: 100%;
+  min-height: 350px;
+  margin-top: 30px;
+  box-shadow: 0 21px 33px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #fff;
 }
