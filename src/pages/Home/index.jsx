@@ -27,10 +27,10 @@ function HomePage() {
       <div className="main-card">
         <div className="card-sidebar">
           <div className="active">
-            <MdOutlineTextFields size={40} />
+            <img src={TEXT_COLOR} alt="" />
           </div>
           <div>
-            <FaRegFileAlt size={35} />
+            <img src={FILE_GREY} alt="" />
           </div>
         </div>
         <div className="card-container"></div>
