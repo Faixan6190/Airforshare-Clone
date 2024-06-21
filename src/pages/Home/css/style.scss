@@ -53,9 +53,11 @@ body {
   box-shadow: 0 21px 33px 0 rgba(0, 0, 0, 0.1);
   border: 1px solid #fff;
   .card-sidebar {
-    padding: 10px;
     background-color: #f4f4f4;
+    padding: 10px;
     div {
+      margin-bottom: 20px;
+      cursor: pointer;
       svg {
         color: $light-color;
       }
