@@ -1,6 +1,7 @@
 import LOGO from "../../assets/images/logo.svg";
 import "./css/style.scss";
 import { MdOutlineTextFields } from "react-icons/md";
+import { FaRegFileAlt } from "react-icons/fa";
 
 function HomePage() {
   return (
@@ -21,7 +22,12 @@ function HomePage() {
       </div>
       <div className="main-card">
         <div className="card-sidebar">
-          <MdOutlineTextFields style={{ width: 30, height: 25 }} />
+          <div className="active">
+            <MdOutlineTextFields size={40} />
+          </div>
+          <div>
+            <FaRegFileAlt size={35} />
+          </div>
         </div>
         <div className="card-container"></div>
       </div>

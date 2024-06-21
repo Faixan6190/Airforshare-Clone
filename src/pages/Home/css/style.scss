@@ -52,8 +52,16 @@ body {
   box-shadow: 0 21px 33px 0 rgba(0, 0, 0, 0.1);
   border: 1px solid #fff;
   .card-sidebar {
-    svg {
-      color: $primary-dark-color;
+    padding: 10px;
+    div {
+      svg {
+        color: $light-color;
+      }
+    }
+    .active {
+      svg {
+        color: $primary-dark-color;
+      }
     }
   }
 }
