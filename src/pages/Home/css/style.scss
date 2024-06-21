@@ -45,6 +45,7 @@ body {
 }
 
 .main-card {
+  display: flex;
   background-color: $white;
   width: 100%;
   min-height: 350px;
@@ -53,6 +54,7 @@ body {
   border: 1px solid #fff;
   .card-sidebar {
     padding: 10px;
+    background-color: #f4f4f4;
     div {
       svg {
         color: $light-color;
