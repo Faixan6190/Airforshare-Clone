@@ -2,6 +2,10 @@ import LOGO from "../../assets/images/logo.svg";
 import "./css/style.scss";
 import { MdOutlineTextFields } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
+import TEXT_GREY from "../../assets/images/text-grey.svg";
+import TEXT_COLOR from "../../assets/images/text-color.svg";
+import FILE_GREY from "../../assets/images/files-grey.svg";
+import FILE_COLOR from "../../assets/images/files-color.svg";
 
 function HomePage() {
   return (
