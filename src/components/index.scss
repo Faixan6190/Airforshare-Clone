@@ -1,4 +1,5 @@
 $light-color: #a1a3a1;
+$primary-dark-color: #745dff;
 
 .text-area {
   border: none;
@@ -22,5 +23,26 @@ $light-color: #a1a3a1;
     color: $light-color;
     font-weight: lighter;
     font-family: "Open Sans", sans-serif;
+  }
+}
+
+.theme-btn {
+  border: 1px solid #000;
+  background-color: transparent;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+  background-color: #fff;
+  padding: 12px 70px;
+  cursor: pointer;
+  &:hover {
+    color: $primary-dark-color;
+    border-color: $primary-dark-color;
+    text-shadow: 1px 1px 0px $primary-dark-color;
+    box-shadow: 1px 1px 0px 0px $primary-dark-color;
+  }
+  &:active {
+    color: #fff;
+    background-image: linear-gradient(to bottom, #864bff, #5082ff);
   }
 }

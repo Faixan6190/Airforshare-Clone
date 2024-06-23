@@ -80,8 +80,23 @@ body {
     }
   }
   .text-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .resize-section {
       width: 100%;
+      flex: 1;
+    }
+    .save-btn-section {
+      span {
+        font-size: 12px;
+        margin-right: 50px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      padding: 20px 0px;
+      text-align: right;
     }
   }
 }

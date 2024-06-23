@@ -1,7 +1,11 @@
 import React from "react";
 
-const ThemeButton = ({ title }) => {
-  return <button>{title}</button>;
+const ThemeButton = ({ disabled, title, onClick }) => {
+  return (
+    <button disabled={disabled} className="theme-btn" onClick={onClick}>
+      {title}
+    </button>
+  );
 };
 
 export default ThemeButton;
