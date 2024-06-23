@@ -65,3 +65,24 @@ $secondary-color: #638eff;
     }
   }
 }
+
+.files-list {
+  display: flex;
+  div {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      color: #000;
+      font-size: 34px;
+      margin-bottom: 6px;
+    }
+    &:hover {
+      background-color: rgba(158, 161, 161, 0.1);
+    }
+  }
+}

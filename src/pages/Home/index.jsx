@@ -8,6 +8,7 @@ import { useState } from "react";
 import TextArea from "../../components/TextArea";
 import ThemeButton from "../../components/Button";
 import DropZone from "../../components/DropZone";
+import FilesList from "../../components/FilesList";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -53,7 +54,14 @@ function HomePage() {
           ) : (
             <div className="files-section">
               <h1>Files</h1>
-              <DropZone />
+              {/* <DropZone
+                textElement={
+                  <>
+                    Drag and drop any files up to 2 files, 5Mbs each or <span>Browse Upgrade</span> to get more space
+                  </>
+                }
+              /> */}
+              <FilesList />
             </div>
           )}
         </div>
