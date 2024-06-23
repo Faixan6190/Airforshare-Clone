@@ -86,3 +86,18 @@ $secondary-color: #638eff;
     }
   }
 }
+
+.add-more-files {
+  line-height: 20px;
+  svg {
+    margin-bottom: 0 !important;
+    font-size: 24px !important;
+  }
+  p {
+    margin: 0;
+  }
+  span {
+    font-size: 10px;
+    color: rgba(158, 161, 161, 0.1);
+  }
+}
