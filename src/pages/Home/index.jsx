@@ -33,7 +33,14 @@ function HomePage() {
             <img src={FILE_GREY} alt="" />
           </div>
         </div>
-        <div className="card-container"></div>
+        <div className="card-container">
+          <div className="text-section">
+            <h1>Text</h1>
+          </div>
+          <div className="files-section">
+            <h1>Files</h1>
+          </div>
+        </div>
       </div>
     </div>
   );
