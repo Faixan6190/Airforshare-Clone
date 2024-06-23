@@ -46,3 +46,8 @@ $primary-dark-color: #745dff;
     background-image: linear-gradient(to bottom, #864bff, #5082ff);
   }
 }
+
+.drop-zone {
+  width: 100%;
+  border: 1.5px dashed rgba(158, 161, 161, 0.5);
+}

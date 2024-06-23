@@ -7,17 +7,11 @@ import FILE_COLOR from "../../assets/images/files-color.svg";
 import { useState } from "react";
 import TextArea from "../../components/TextArea";
 import ThemeButton from "../../components/Button";
-import { useDropzone } from "react-dropzone";
+import DropZone from "../../components/DropZone";
 
 function HomePage() {
   const [type, setType] = useState("text");
   const [textValue, setTextValue] = useState("");
-
-  const onDrop = (acceptedFiles) => {
-    // Do something with the files
-    console.log("acceptedFiles", acceptedFiles);
-  };
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <div className="container">
@@ -59,10 +53,7 @@ function HomePage() {
           ) : (
             <div className="files-section">
               <h1>Files</h1>
-              <div className="drop-zone" {...getRootProps()}>
-                <input {...getInputProps()} />
-                {isDragActive ? <p>Drop the files here ...</p> : <p>Drag 'n' drop some files here, or click to select files</p>}
-              </div>
+              <DropZone />
             </div>
           )}
         </div>
