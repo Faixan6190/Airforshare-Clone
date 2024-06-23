@@ -9,8 +9,9 @@ $light-color: #a1a3a1;
   width: 100%;
   padding: 10px 0;
   border: none;
-  min-height: 221px;
-  max-height: auto;
+  overflow: hidden;
+  // min-height: 221px;
+  // max-height: auto;
   &::-webkit-scrollbar {
     display: none;
   }
