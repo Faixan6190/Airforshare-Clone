@@ -1,5 +1,6 @@
 $light-color: #a1a3a1;
 $primary-dark-color: #745dff;
+$secondary-color: #638eff;
 
 .text-area {
   border: none;
@@ -50,4 +51,17 @@ $primary-dark-color: #745dff;
 .drop-zone {
   width: 100%;
   border: 1.5px dashed rgba(158, 161, 161, 0.5);
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: rgba(158, 161, 161, 0.5);
+    width: 50%;
+    text-align: center;
+    line-height: 30px;
+    span {
+      color: $secondary-color;
+    }
+  }
 }

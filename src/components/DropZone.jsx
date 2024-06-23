@@ -12,7 +12,9 @@ const DropZone = () => {
   return (
     <div className="drop-zone" {...getRootProps()}>
       <input {...getInputProps()} />
-      Drag and drop any files up to 2 files, 5Mbs each or Browse Upgrade to get more space
+      <div>
+        Drag and drop any files up to 2 files, 5Mbs each or <span>Browse Upgrade</span> to get more space
+      </div>
     </div>
   );
 };
