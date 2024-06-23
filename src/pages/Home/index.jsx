@@ -38,7 +38,7 @@ function HomePage() {
           {type === "text" ? (
             <div className="text-section">
               <h1>Text</h1>
-              <div>
+              <div className="resize-section">
                 <TextArea />
               </div>
             </div>

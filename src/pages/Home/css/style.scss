@@ -11,7 +11,6 @@ body {
 
 .container {
   width: 70%;
-  // max-width: 992px;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -48,7 +47,7 @@ body {
   display: flex;
   background-color: $white;
   width: 100%;
-  min-height: 350px;
+  max-height: auto;
   margin-top: 30px;
   box-shadow: 0 21px 33px 0 rgba(0, 0, 0, 0.1);
   .card-sidebar {
@@ -68,6 +67,7 @@ body {
 .card-container {
   border: 1px solid #fff;
   padding: 0px 50px;
+  width: 100%;
   div {
     h1 {
       font-size: 44px;
@@ -76,6 +76,11 @@ body {
       letter-spacing: 0.6px;
       color: #000;
       margin-bottom: 28px;
+    }
+  }
+  .text-section {
+    .resize-section {
+      width: 100%;
     }
   }
 }
