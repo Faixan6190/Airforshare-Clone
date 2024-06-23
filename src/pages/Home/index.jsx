@@ -5,6 +5,7 @@ import TEXT_COLOR from "../../assets/images/text-color.svg";
 import FILE_GREY from "../../assets/images/files-grey.svg";
 import FILE_COLOR from "../../assets/images/files-color.svg";
 import { useState } from "react";
+import TextArea from "../../components/TextArea";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -37,6 +38,9 @@ function HomePage() {
           {type === "text" ? (
             <div className="text-section">
               <h1>Text</h1>
+              <div>
+                <TextArea />
+              </div>
             </div>
           ) : (
             <div className="files-section">
