@@ -11,11 +11,12 @@ import FilesList from "../../components/FilesList";
 import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
-import { db, ref, set, onValue } from "../../db";
+import { db, ref, set, onValue, remove } from "../../db";
 
 function HomePage() {
   const [type, setType] = useState("text");
   const [textValue, setTextValue] = useState("");
+  const [isText, setIsText] = useState(false);
   const [files, setFiles] = useState([]);
 
   const onDrop = (acceptedFiles) => {
@@ -29,11 +30,20 @@ function HomePage() {
     });
   };
 
+  const clearText = async () => {
+    await remove(ref(db, "sharing"));
+    setTextValue("");
+    setIsText(false);
+  };
+
   useEffect(() => {
     const starCountRef = ref(db, "sharing");
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       setTextValue(data.text);
+      if (data.text) {
+        setIsText(true);
+      }
     });
   }, []);
 
@@ -67,11 +77,26 @@ function HomePage() {
             <div className="text-section">
               <h1>Text</h1>
               <div className="resize-section">
-                <TextArea value={textValue} onChange={(e) => setTextValue(e.target.value)} />
+                <TextArea
+                  value={textValue}
+                  onChange={(e) => {
+                    setTextValue(e.target.value);
+                    setIsText(false);
+                  }}
+                />
               </div>
               <div className="save-btn-section">
-                <span>Clear</span>
-                <ThemeButton onClick={saveChanges} disabled={textValue ? false : true} title={"Save"} />
+                <span onClick={clearText}>Clear</span>
+                {isText ? (
+                  <ThemeButton
+                    onClick={() => {
+                      navigator.clipboard.writeText(textValue);
+                    }}
+                    title={"Copy"}
+                  />
+                ) : (
+                  <ThemeButton onClick={saveChanges} disabled={textValue ? false : true} title={"Save"} />
+                )}
               </div>
             </div>
           ) : (
