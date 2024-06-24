@@ -47,6 +47,8 @@ function HomePage() {
     });
   }, []);
 
+  const links = textValue.match(/\bhttp?::\/\/\S+/gi) || [];
+
   return (
     <div className="container">
       <div className="header-bar">
@@ -85,18 +87,31 @@ function HomePage() {
                   }}
                 />
               </div>
-              <div className="save-btn-section">
-                <span onClick={clearText}>Clear</span>
-                {isText ? (
-                  <ThemeButton
-                    onClick={() => {
-                      navigator.clipboard.writeText(textValue);
-                    }}
-                    title={"Copy"}
-                  />
-                ) : (
-                  <ThemeButton onClick={saveChanges} disabled={textValue ? false : true} title={"Save"} />
-                )}
+              <div className="text-footer">
+                <div>
+                  {links.map((v, i) => (
+                    <div key={i}>
+                      <span>
+                        <a href={v} target="_blank" rel="noopener noreferrer">
+                          {v}
+                        </a>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="save-btn-section">
+                  <span onClick={clearText}>Clear</span>
+                  {isText ? (
+                    <ThemeButton
+                      onClick={() => {
+                        navigator.clipboard.writeText(textValue);
+                      }}
+                      title={"Copy"}
+                    />
+                  ) : (
+                    <ThemeButton onClick={saveChanges} disabled={textValue ? false : true} title={"Save"} />
+                  )}
+                </div>
               </div>
             </div>
           ) : (

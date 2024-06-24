@@ -98,6 +98,18 @@ body {
       padding: 20px 0px;
       text-align: right;
     }
+    .text-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        span {
+          a {
+            color: $primary-color;
+          }
+        }
+      }
+    }
   }
   .files-section {
     height: 100%;
