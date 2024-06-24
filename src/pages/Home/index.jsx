@@ -7,8 +7,9 @@ import FILE_COLOR from "../../assets/images/files-color.svg";
 import { useState } from "react";
 import TextArea from "../../components/TextArea";
 import ThemeButton from "../../components/Button";
-import DropZone from "../../components/DropZone";
 import FilesList from "../../components/FilesList";
+import { FaDownload } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -53,7 +54,19 @@ function HomePage() {
             </div>
           ) : (
             <div className="files-section">
-              <h1>Files</h1>
+              <div className="">
+                <h1>Files</h1>
+                <div>
+                  <div>
+                    <FaDownload />
+                    Download All
+                  </div>
+                  <div>
+                    <MdDelete />
+                    Delete All
+                  </div>
+                </div>
+              </div>
               {/* <DropZone
                 textElement={
                   <>
