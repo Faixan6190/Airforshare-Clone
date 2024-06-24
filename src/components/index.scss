@@ -92,12 +92,15 @@ $secondary-color: #638eff;
   svg {
     margin-bottom: 0 !important;
     font-size: 24px !important;
+    color: $primary-dark-color;
   }
   p {
     margin: 0;
+    font-size: 14px;
+    font-weight: bold;
   }
   span {
     font-size: 10px;
-    color: rgba(158, 161, 161, 0.1);
+    color: rgba(158, 161, 161, 0.8) !important;
   }
 }
