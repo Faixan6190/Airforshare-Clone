@@ -10,10 +10,24 @@ import ThemeButton from "../../components/Button";
 import FilesList from "../../components/FilesList";
 import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import DropZone from "../../components/DropZone";
+import { db, ref, set } from "../../db";
 
 function HomePage() {
   const [type, setType] = useState("text");
   const [textValue, setTextValue] = useState("");
+  const [files, setFiles] = useState([]);
+
+  const onDrop = (acceptedFiles) => {
+    console.log("acceptedFiles", acceptedFiles);
+    setFiles([...files, ...acceptedFiles]);
+  };
+
+  const saveChanges = () => {
+    set(ref(db, "sharing"), {
+      text: textValue,
+    });
+  };
 
   return (
     <div className="container">
@@ -49,32 +63,36 @@ function HomePage() {
               </div>
               <div className="save-btn-section">
                 <span>Clear</span>
-                <ThemeButton disabled={textValue ? false : true} title={"Save"} />
+                <ThemeButton onClick={saveChanges} disabled={textValue ? false : true} title={"Save"} />
               </div>
             </div>
           ) : (
             <div className="files-section">
-              <div className="">
+              <div className="files-header">
                 <h1>Files</h1>
-                <div>
-                  <div>
+                <div className="files-btn">
+                  <div className="download-btn">
                     <FaDownload />
                     Download All
                   </div>
-                  <div>
+                  <div onClick={() => setFiles([])} className="delete-btn">
                     <MdDelete />
                     Delete All
                   </div>
                 </div>
               </div>
-              {/* <DropZone
-                textElement={
-                  <>
-                    Drag and drop any files up to 2 files, 5Mbs each or <span>Browse Upgrade</span> to get more space
-                  </>
-                }
-              /> */}
-              <FilesList />
+              {files.length ? (
+                <FilesList files={files} onDrop={onDrop} />
+              ) : (
+                <DropZone
+                  onDrop={onDrop}
+                  textElement={
+                    <>
+                      Drag and drop any files up to 2 files, 5Mbs each or <span>Browse Upgrade</span> to get more space
+                    </>
+                  }
+                />
+              )}
             </div>
           )}
         </div>

@@ -2,16 +2,46 @@ import React from "react";
 import { CiFileOn } from "react-icons/ci";
 import DropZone from "./DropZone";
 import { GoPlus } from "react-icons/go";
+import { FaHtml5 } from "react-icons/fa";
+import { FaCss3Alt } from "react-icons/fa";
+import { IoLogoJavascript } from "react-icons/io";
 
-const FilesList = () => {
+const FilesList = ({ files, onDrop }) => {
   return (
     <div className="files-list">
-      <div>
-        <CiFileOn />
-        <span>index.html</span>
-      </div>
+      {files.map((v, i) => {
+        let icon;
+        switch (v.type) {
+          case "text/html":
+            icon = <FaHtml5 />;
+            break;
+          case "text/css":
+            icon = <FaCss3Alt />;
+            break;
+          case "text/javascript":
+            icon = <IoLogoJavascript />;
+            break;
+          default:
+            icon = <CiFileOn />;
+        }
+        return (
+          <div key={i}>
+            {v.type.indexOf("image") !== -1 ? (
+              <img className="image-file" width={100} height={100} src={URL.createObjectURL(v)} alt="" />
+            ) : (
+              <>
+                {icon}
+                <span className="file-name">
+                  {v.name.slice(0, 10)} <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
+                </span>
+              </>
+            )}
+          </div>
+        );
+      })}
       <div>
         <DropZone
+          onDrop={onDrop}
           textElement={
             <span className="add-more-files">
               <GoPlus />

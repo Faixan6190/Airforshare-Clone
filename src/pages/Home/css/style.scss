@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
   margin-top: 50px;
 }
@@ -47,7 +47,7 @@ body {
   display: flex;
   background-color: $white;
   width: 100%;
-  min-height: 350px;
+  min-height: 400px;
   max-height: auto;
   margin-top: 30px;
   box-shadow: 0 21px 33px 0 rgba(0, 0, 0, 0.1);
@@ -101,5 +101,43 @@ body {
   }
   .files-section {
     height: 100%;
+    .files-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .files-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        div {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          cursor: pointer;
+          &:active {
+            opacity: 0.5;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        .download-btn {
+          color: $primary-color;
+          svg {
+            font-size: 20px;
+            margin-right: 6px;
+            margin-bottom: 2px;
+          }
+        }
+        .delete-btn {
+          color: #963a45;
+          svg {
+            font-size: 22px;
+            margin-right: 6px;
+            margin-bottom: 2px;
+          }
+        }
+      }
+    }
   }
 }

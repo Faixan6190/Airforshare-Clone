@@ -68,6 +68,8 @@ $secondary-color: #638eff;
 
 .files-list {
   display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   div {
     width: 100px;
     height: 100px;
@@ -76,6 +78,13 @@ $secondary-color: #638eff;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    .file-name {
+      font-size: 12px;
+      text-align: center;
+    }
+    .image-file {
+      object-fit: cover;
+    }
     svg {
       color: #000;
       font-size: 34px;
