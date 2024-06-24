@@ -47,7 +47,7 @@ function HomePage() {
     });
   }, []);
 
-  const links = textValue.match(/\bhttp?::\/\/\S+/gi) || [];
+  const links = textValue.match(/\bhttp?:\/\/\S+/gi) || [];
 
   return (
     <div className="container">
