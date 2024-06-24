@@ -4,14 +4,14 @@ import TEXT_GREY from "../../assets/images/text-grey.svg";
 import TEXT_COLOR from "../../assets/images/text-color.svg";
 import FILE_GREY from "../../assets/images/files-grey.svg";
 import FILE_COLOR from "../../assets/images/files-color.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextArea from "../../components/TextArea";
 import ThemeButton from "../../components/Button";
 import FilesList from "../../components/FilesList";
 import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
-import { db, ref, set } from "../../db";
+import { db, ref, set, onValue } from "../../db";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -28,6 +28,14 @@ function HomePage() {
       text: textValue,
     });
   };
+
+  useEffect(() => {
+    const starCountRef = ref(db, "sharing");
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      setTextValue(data.text);
+    });
+  }, []);
 
   return (
     <div className="container">

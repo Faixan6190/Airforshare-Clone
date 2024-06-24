@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./index.scss";
 
-const TextArea = ({ onChange }) => {
+const TextArea = ({ value, onChange }) => {
   const textAreaRef = useRef();
   const resizeTextArea = (event) => {
     textAreaRef.current.style.height = "24px";
@@ -9,6 +9,7 @@ const TextArea = ({ onChange }) => {
   };
   return (
     <textarea
+      value={value}
       onChange={onChange}
       ref={textAreaRef}
       onInput={resizeTextArea}
