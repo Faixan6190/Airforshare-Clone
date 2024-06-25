@@ -11,7 +11,7 @@ import FilesList from "../../components/FilesList";
 import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
-import { db, ref, set, onValue, remove } from "../../db";
+import { db, ref, set, onValue, remove, storage, storageRef, uploadBytesResumable, getDownloadURL } from "../../db";
 import CodeEditor from "../../components/CodeEditor";
 
 function HomePage() {
@@ -21,8 +21,34 @@ function HomePage() {
   const [files, setFiles] = useState([]);
 
   const onDrop = (acceptedFiles) => {
-    console.log("acceptedFiles", acceptedFiles);
+    uploadFile(acceptedFiles[0], 0);
     setFiles([...files, ...acceptedFiles]);
+  };
+
+  const uploadFile = (file, i) => {
+    const fileRef = storageRef(storage, `files/file-${i}`);
+    const uploadTask = uploadBytesResumable(fileRef, file);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("Upload is " + progress + "% done");
+        switch (snapshot.state) {
+          case "paused":
+            console.log("Upload is paused");
+            break;
+          case "running":
+            console.log("Upload is running");
+            break;
+        }
+      },
+      (error) => {},
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log("File available at", downloadURL);
+        });
+      }
+    );
   };
 
   const saveChanges = () => {
