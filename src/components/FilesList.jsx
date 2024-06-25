@@ -9,7 +9,7 @@ import { IoLogoJavascript } from "react-icons/io";
 const FilesList = ({ tempFiles, files, onDrop }) => {
   return (
     <div className="files-list">
-      {files.map((v, i) => {
+      {files?.map((v, i) => {
         let icon;
         switch (v.type) {
           case "text/html":
@@ -56,7 +56,7 @@ const FilesList = ({ tempFiles, files, onDrop }) => {
             icon = <CiFileOn />;
         }
         return (
-          <div key={i}>
+          <div className="temp-file" key={i}>
             {v.type.indexOf("image") !== -1 ? (
               <img className="image-file" width={100} height={100} src={URL.createObjectURL(v)} alt="" />
             ) : (
@@ -71,6 +71,7 @@ const FilesList = ({ tempFiles, files, onDrop }) => {
           </div>
         );
       })}
+
       <div>
         <DropZone
           onDrop={onDrop}

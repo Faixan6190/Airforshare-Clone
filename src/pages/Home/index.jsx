@@ -24,7 +24,7 @@ function HomePage() {
     setTempFiles([...tempFiles, ...acceptedFiles]);
     let arr = [];
     for (var i = 0; i < acceptedFiles.length; i++) {
-      arr.push(uploadFile(acceptedFiles[i], i));
+      arr.push(uploadFile(acceptedFiles[i], files?.length + i));
     }
     const allFiles = await Promise.all(arr);
     setFiles([...files, ...allFiles]);
@@ -78,13 +78,18 @@ function HomePage() {
   };
 
   useEffect(() => {
-    const starCountRef = ref(db, "text-sharing");
-    onValue(starCountRef, (snapshot) => {
+    const textRef = ref(db, "text-sharing");
+    onValue(textRef, (snapshot) => {
       const data = snapshot.val();
       setTextValue(data?.text);
       if (data?.text) {
         setIsText(true);
       }
+    });
+    const fileRef = ref(db, "file-sharing");
+    onValue(fileRef, (snapshot) => {
+      const data = snapshot.val();
+      setFiles(data?.files);
     });
   }, []);
 
@@ -173,7 +178,7 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              {tempFiles.length || files.length ? (
+              {tempFiles?.length || files?.length ? (
                 <FilesList tempFiles={tempFiles} files={files} onDrop={onDrop} />
               ) : (
                 <DropZone
