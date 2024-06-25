@@ -11,12 +11,13 @@
   },
   "dependencies": {
     "firebase": "^10.12.2",
+    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^5.2.1",
-    "react-linkify": "^1.0.0-alpha",
     "react-router-dom": "^6.23.1",
+    "react-simple-code-editor": "^0.13.1",
     "sass": "^1.77.5"
   },
   "devDependencies": {

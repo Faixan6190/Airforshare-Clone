@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./index.scss";
 
 const TextArea = ({ value, onChange }) => {
@@ -7,6 +7,11 @@ const TextArea = ({ value, onChange }) => {
     textAreaRef.current.style.height = "24px";
     textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 12 + "px";
   };
+
+  useEffect(() => {
+    resizeTextArea();
+  }, [value]);
+
   return (
     <textarea
       value={value}

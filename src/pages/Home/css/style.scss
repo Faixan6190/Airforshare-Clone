@@ -85,8 +85,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     .resize-section {
-      width: 100%;
       flex: 1;
+      width: 100%;
     }
     .save-btn-section {
       span {
@@ -102,7 +102,11 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .links {
+        flex: 1;
+      }
       div {
+        margin-bottom: 5px;
         span {
           a {
             color: $primary-color;

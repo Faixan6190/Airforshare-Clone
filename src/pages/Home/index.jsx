@@ -12,6 +12,7 @@ import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
 import { db, ref, set, onValue, remove } from "../../db";
+import CodeEditor from "../../components/CodeEditor";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -47,7 +48,10 @@ function HomePage() {
     });
   }, []);
 
-  const links = textValue.match(/\bhttp?:\/\/\S+/gi) || [];
+  var expression =
+    /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+  var regex = new RegExp(expression);
+  const links = textValue.match(regex) || [];
 
   return (
     <div className="container">
@@ -88,7 +92,7 @@ function HomePage() {
                 />
               </div>
               <div className="text-footer">
-                <div>
+                <div className="links">
                   {links.map((v, i) => (
                     <div key={i}>
                       <span>
