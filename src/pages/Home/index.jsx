@@ -12,63 +12,77 @@ import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
 import { db, ref, set, onValue, remove, storage, storageRef, uploadBytesResumable, getDownloadURL } from "../../db";
-import CodeEditor from "../../components/CodeEditor";
 
 function HomePage() {
   const [type, setType] = useState("text");
   const [textValue, setTextValue] = useState("");
   const [isText, setIsText] = useState(false);
   const [files, setFiles] = useState([]);
+  const [tempFiles, setTempFiles] = useState([]);
 
-  const onDrop = (acceptedFiles) => {
-    uploadFile(acceptedFiles[0], 0);
-    setFiles([...files, ...acceptedFiles]);
+  const onDrop = async (acceptedFiles) => {
+    setTempFiles([...tempFiles, ...acceptedFiles]);
+    let arr = [];
+    for (var i = 0; i < acceptedFiles.length; i++) {
+      arr.push(uploadFile(acceptedFiles[i], i));
+    }
+    const allFiles = await Promise.all(arr);
+    setFiles([...files, ...allFiles]);
+    set(ref(db, "file-sharing"), {
+      files: [...files, ...allFiles],
+    });
+    setTempFiles([]);
   };
+  console.log("files", files);
 
   const uploadFile = (file, i) => {
-    const fileRef = storageRef(storage, `files/file-${i}`);
-    const uploadTask = uploadBytesResumable(fileRef, file);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
+    return new Promise((resolve, reject) => {
+      const fileRef = storageRef(storage, `files/file-${i}`);
+      const uploadTask = uploadBytesResumable(fileRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve({ url: downloadURL, type: file.type, name: file.name });
+          });
         }
-      },
-      (error) => {},
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log("File available at", downloadURL);
-        });
-      }
-    );
+      );
+    });
   };
 
   const saveChanges = () => {
-    set(ref(db, "sharing"), {
+    set(ref(db, "text-sharing"), {
       text: textValue,
     });
   };
 
   const clearText = async () => {
-    await remove(ref(db, "sharing"));
+    await remove(ref(db, "text-sharing"));
     setTextValue("");
     setIsText(false);
   };
 
   useEffect(() => {
-    const starCountRef = ref(db, "sharing");
+    const starCountRef = ref(db, "text-sharing");
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      setTextValue(data.text);
-      if (data.text) {
+      setTextValue(data?.text);
+      if (data?.text) {
         setIsText(true);
       }
     });
@@ -77,7 +91,7 @@ function HomePage() {
   var expression =
     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   var regex = new RegExp(expression);
-  const links = textValue.match(regex) || [];
+  const links = textValue?.match(regex) || [];
 
   return (
     <div className="container">
@@ -159,8 +173,8 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              {files.length ? (
-                <FilesList files={files} onDrop={onDrop} />
+              {tempFiles.length || files.length ? (
+                <FilesList tempFiles={tempFiles} files={files} onDrop={onDrop} />
               ) : (
                 <DropZone
                   onDrop={onDrop}

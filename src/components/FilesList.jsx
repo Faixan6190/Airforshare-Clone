@@ -6,10 +6,41 @@ import { FaHtml5 } from "react-icons/fa";
 import { FaCss3Alt } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 
-const FilesList = ({ files, onDrop }) => {
+const FilesList = ({ tempFiles, files, onDrop }) => {
   return (
     <div className="files-list">
       {files.map((v, i) => {
+        let icon;
+        switch (v.type) {
+          case "text/html":
+            icon = <FaHtml5 />;
+            break;
+          case "text/css":
+            icon = <FaCss3Alt />;
+            break;
+          case "text/javascript":
+            icon = <IoLogoJavascript />;
+            break;
+          default:
+            icon = <CiFileOn />;
+        }
+        return (
+          <div key={i}>
+            {v.type.indexOf("image") !== -1 ? (
+              <img className="image-file" width={100} height={100} src={v.url} alt="" />
+            ) : (
+              <>
+                {icon}
+                <span className="file-name">
+                  {v.name.slice(0, 10)}
+                  <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
+                </span>
+              </>
+            )}
+          </div>
+        );
+      })}
+      {tempFiles.map((v, i) => {
         let icon;
         switch (v.type) {
           case "text/html":
@@ -32,7 +63,8 @@ const FilesList = ({ files, onDrop }) => {
               <>
                 {icon}
                 <span className="file-name">
-                  {v.name.slice(0, 10)} <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
+                  {v.name.slice(0, 10)}
+                  <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
                 </span>
               </>
             )}
