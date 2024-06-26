@@ -77,6 +77,11 @@ function HomePage() {
     setIsText(false);
   };
 
+  const deleteAllFiles = async () => {
+    await remove(ref(db, "file-sharing"));
+    setFiles([]);
+  };
+
   useEffect(() => {
     const textRef = ref(db, "text-sharing");
     onValue(textRef, (snapshot) => {
@@ -172,7 +177,7 @@ function HomePage() {
                     <FaDownload />
                     Download All
                   </div>
-                  <div onClick={() => setFiles([])} className="delete-btn">
+                  <div onClick={deleteAllFiles} className="delete-btn">
                     <MdDelete />
                     Delete All
                   </div>

@@ -5,6 +5,7 @@ import { GoPlus } from "react-icons/go";
 import { FaHtml5 } from "react-icons/fa";
 import { FaCss3Alt } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
+import LOADER from "../assets/images/loader.gif";
 
 const FilesList = ({ tempFiles, files, onDrop }) => {
   return (
@@ -68,10 +69,10 @@ const FilesList = ({ tempFiles, files, onDrop }) => {
                 </span>
               </>
             )}
+            <img className="upload-loader" src={LOADER} alt="" />
           </div>
         );
       })}
-x``
       <div>
         <DropZone
           onDrop={onDrop}

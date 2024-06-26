@@ -116,4 +116,10 @@ $secondary-color: #638eff;
 
 .temp-file {
   filter: brightness(50%);
+  position: relative;
+  .upload-loader {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+  }
 }
