@@ -3,7 +3,7 @@ import { getDatabase, ref, set, onValue, remove } from "firebase/database";
 import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.VITE_API_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "to-do-app-19ac6.firebaseapp.com",
   projectId: "to-do-app-19ac6",
   storageBucket: "to-do-app-19ac6.appspot.com",
