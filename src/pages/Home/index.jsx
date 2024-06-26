@@ -12,6 +12,7 @@ import { FaDownload } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
 import { db, ref, set, onValue, remove, storage, storageRef, uploadBytesResumable, getDownloadURL } from "../../db";
+import JSZip from "jszip";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -80,6 +81,30 @@ function HomePage() {
   const deleteAllFiles = async () => {
     await remove(ref(db, "file-sharing"));
     setFiles([]);
+  };
+
+  const downloadAll = () => {
+    let filename = "MultiFilesDownload";
+    const urls = files.map((v) => v.url);
+    const zip = new JSZip();
+    const folder = zip.folder("project");
+    urls.forEach((url) => {
+      const blobPromise = fetch(url).then(function (response) {
+        console.log({ response });
+        if (response.status === 200 || response.status === 0) {
+          return Promise.resolve(response.blob());
+        } else {
+          return Promise.reject(new Error(response.statusText));
+        }
+      });
+      const name = url.substring(url.lastIndexOf("/"));
+      folder.file(name, blobPromise);
+    });
+
+    zip
+      .generateAsync({ type: "blob" })
+      .then((blob) => saveAs(blob, filename))
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
@@ -173,7 +198,7 @@ function HomePage() {
               <div className="files-header">
                 <h1>Files</h1>
                 <div className="files-btn">
-                  <div className="download-btn">
+                  <div onClick={downloadAll} className="download-btn">
                     <FaDownload />
                     Download All
                   </div>
