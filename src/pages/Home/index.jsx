@@ -13,6 +13,7 @@ import { MdDelete } from "react-icons/md";
 import DropZone from "../../components/DropZone";
 import { db, ref, set, onValue, remove, storage, storageRef, uploadBytesResumable, getDownloadURL } from "../../db";
 import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 function HomePage() {
   const [type, setType] = useState("text");
@@ -84,10 +85,10 @@ function HomePage() {
   };
 
   const downloadAll = () => {
-    let filename = "MultiFilesDownload";
+    let filename = "AllFiles";
     const urls = files.map((v) => v.url);
     const zip = new JSZip();
-    const folder = zip.folder("project");
+    const folder = zip.folder("project"); 
     urls.forEach((url) => {
       const blobPromise = fetch(url).then(function (response) {
         console.log({ response });
