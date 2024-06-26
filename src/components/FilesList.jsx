@@ -71,7 +71,7 @@ const FilesList = ({ tempFiles, files, onDrop }) => {
           </div>
         );
       })}
-
+x``
       <div>
         <DropZone
           onDrop={onDrop}
