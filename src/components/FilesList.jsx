@@ -26,19 +26,21 @@ const FilesList = ({ tempFiles, files, onDrop }) => {
             icon = <CiFileOn />;
         }
         return (
-          <div key={i}>
-            {v.type.indexOf("image") !== -1 ? (
-              <img className="image-file" width={100} height={100} src={v.url} alt="" />
-            ) : (
-              <>
-                {icon}
-                <span className="file-name">
-                  {v.name.slice(0, 10)}
-                  <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
-                </span>
-              </>
-            )}
-          </div>
+          <a href={v.url} target="_blank" download key={i}>
+            <div>
+              {v.type.indexOf("image") !== -1 ? (
+                <img className="image-file" width={100} height={100} src={v.url} alt="" />
+              ) : (
+                <>
+                  {icon}
+                  <span className="file-name">
+                    {v.name.slice(0, 10)}
+                    <b>{v.name.slice(v.name.lastIndexOf("."))}</b>
+                  </span>
+                </>
+              )}
+            </div>
+          </a>
         );
       })}
       {tempFiles.map((v, i) => {
