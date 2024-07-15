@@ -9,4 +9,3 @@ const ThemeButton = ({ disabled, title, onClick }) => {
 };
 
 export default ThemeButton;
-
